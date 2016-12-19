@@ -21,14 +21,15 @@
     var data = {
       username: $('#username').val(),
       password: $('#password').val()
-    }
+    };
 
     $.ajax({
       method: 'POST',
       url: '/register',
       data: data,
       success: function (token) {
-        // empty for now
+        token = JSON.stringify(token);
+        localStorage['passport-jwt'] = token;
       }
     });
   });

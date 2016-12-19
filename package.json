@@ -1,18 +1,29 @@
 {
   "name": "passport-fun",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.0",
     "express": "^4.13.4",
+    "express-jwt": "^5.1.0",
+    "jsonwebtoken": "^7.2.1",
     "mongoose": "^4.4.14",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maitabe/passport-jwt-fun.git"
+  },
+  "bugs": {
+    "url": "https://github.com/maitabe/passport-jwt-fun/issues"
+  },
+  "homepage": "https://github.com/maitabe/passport-jwt-fun#readme",
+  "description": ""
 }

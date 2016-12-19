@@ -4,5 +4,32 @@
 <button class="logout">Log Out</button>
 
 <script type="text/javascript">
-  // empty for now  
+
+  	  $('.logout').on('click', function (e) {
+	    e.preventDefault();
+	    localStorage.removeItem('passport-jwt');
+	  });
+
+	  var getToken = function () {
+		  return localStorage['passport-jwt'];
+		};
+
+		if (getToken) {
+		  $('.get').on('click', function (e) {
+		    e.preventDefault();
+
+		    $.ajax({
+		      method: 'GET',
+		      url: '/hello',
+		      headers: {Authorization: 'Bearer ' + JSON.parse(getToken()).token},
+		      success: function (data) {
+		        console.log(data);
+		      },
+		      error: function (err) {
+		        console.log(err);
+		      }
+		    });
+		  });
+		}
+
 </script>

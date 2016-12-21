@@ -1,4 +1,6 @@
 var express = require('express');
+
+
 var app = express();
 var passport = require('passport');
 var bodyParser = require('body-parser');
@@ -17,11 +19,18 @@ mongoose.connect('mongodb://localhost/passportjwt');
 var LocalStrategy = require('passport-local').Strategy;
 
 passport.use('login', new LocalStrategy(function(username, password, done) {
-    User.findOne({ username: username }, function (err, user) {
+    User.findOne({ username: username}, function (err, user) {
+
       if (err) { return done(err); }
 
       if (!user) {
+        console.log('password exist condition');
         return done(null, false, { message: 'Incorrect username.' });
+      }
+
+      if (!user.validPassword(password)) {
+        console.log('password false');
+        return done(null, false, { message: 'Incorrect password.' });
       }
 
       return done(null, user);
@@ -46,10 +55,10 @@ app.get('/login', function (req, res) {
 });
 
 app.post('/register', function(req, res, next){
-  var user = new User({
-    username: req.body.username,
-    password: req.body.password
-  });
+  var user = new User();
+
+  user.username = req.body.username;
+  user.setPassword(req.body.password)
 
   user.save(function (err){
     if(err){ return next(err); }
